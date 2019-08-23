@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  auth_proxy:
+    image: bitnami/oauth2-proxy
+    ports:
+      - 8080:8080
+    command: -upstream=http://app:80/ -http-address=0.0.0.0:8080 -redirect-url=http://localhost:8080/oauth2/callback -scope='profile User.Read' -email-domain=* -cookie-domain=localhost -cookie-secure=false -cookie-secret=somerandomstring12341234567890ABCD -provider=azure -azure-tenant ********************* -client-id ************************ -client-secret '*************************'
+
+  app:
+    image: nginx
+    expose:
+      - 80
